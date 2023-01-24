@@ -9,7 +9,7 @@ pipeline {
       stage('Checkout Code') {
             steps {
                 // Checkout the code from the repository
-                git url: 'https://github.com/adeoyedewale/finalclassreview.git'
+                git url: 'https://github.com/febfun1/finalclassreview.git'
             }
         }
 	    
@@ -29,7 +29,7 @@ pipeline {
 	
 	stage('Create Docker Image') {
 	    steps {
-		sh 'docker build -t eruobodo/myximage:$BUILD_NUMBER .'
+		sh 'docker build -t febfun/image:$BUILD_NUMBER .'
 	    }
 	}
 	    
@@ -43,7 +43,7 @@ pipeline {
               withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                 //sh 'docker-compose push myapp'
-		sh 'docker push eruobodo/myximage:$BUILD_NUMBER'
+		sh 'docker push febfun/image:$BUILD_NUMBER'
               }
             }
         }
